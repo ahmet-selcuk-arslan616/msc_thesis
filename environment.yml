@@ -1,0 +1,9 @@
+name: LSE_Capstone
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.12,<3.13
+  - jupyterlab
+  - pip
