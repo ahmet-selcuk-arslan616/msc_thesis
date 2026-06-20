@@ -1,3 +1,10 @@
+<p align="center">
+  <img
+    src="GitHubbanner.png"
+    width="100%"
+  />
+</p>
+
 # A Third Way in Neoclassical Realist Theory of International Politics
 
 The project develops a historically anchored agent-based model (ABM) to examine how three Type III Neoclassical Realist variables shape alliance-related decision-making and system-level alliance-network outcomes:
