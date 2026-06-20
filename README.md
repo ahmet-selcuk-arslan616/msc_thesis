@@ -45,52 +45,6 @@ The next annual round begins again from the observed historical network for that
 
 The model therefore performs a sequence of historically anchored annual transition experiments rather than an unrestricted recursive simulation.
 
-## Decision Mechanism
-
-For country i in year t, directed dyadic pressure from country j is calculated as:
-
-P_{ij,t} = w_{ij,t} \times CINC_{j,t}
-
-where:
-
-w_ij,t is the directed dyadic influence weight;
-CINC_j,t is the material capacity of country j.
-
-The primary threat is the country producing the highest directed pressure:
-
-j^*_{i,t} = \arg\max_{j \neq i}(P_{ij,t})
-
-Action pressure is calculated as:
-
-A_{i,t} = S_{i,t}\left[(1-\alpha)+\alpha C_{i,t}\right]
-
-where:
-
-S_i,t is the normalized strategic-environment score;
-C_i,t is the normalized systemic-clarity score;
-α = 0.50.
-
-A country remains in the status quo when action pressure is below the activation threshold.
-
-Relative resistance compares the country’s own and allied capacity with the capacity of its primary threat:
-
-R_{i,t} =
-\frac{K_{i,t}}
-{K_{i,t}+CINC_{j^*_{i,t},t}}
-
-where K_i,t is the combined capacity of the country and its current allies, excluding the primary threat.
-
-Vulnerability is defined as:
-
-V_{i,t} = 1 - R_{i,t}
-
-The model then calculates balancing and bandwagoning utilities:
-
-U^{Balance}_{i,t} = A_{i,t}R_{i,t}
-U^{Bandwagon}_{i,t} = A_{i,t}V_{i,t}
-
-A state balances when relative resistance is sufficiently high, bandwagons when vulnerability is sufficiently high, and retains the status quo when the difference between the two options remains too small.
-
 ## Historical Anchoring
 
 A central design feature of the model is its historical anchor.
@@ -126,15 +80,6 @@ Mechanism deviation
 Changes in action pressure, resistance, vulnerability, utilities, and formalisation eligibility.
 System deviation
 Changes in alliance-network structure, including edge count, density, modularity, and community structure.
-
-The overall determinacy score is:
-
-Determinacy_x =
-\frac{
-PolicyDeviation_x +
-MechanismDeviation_x +
-SystemDeviation_x
-}{3}
 
 A larger score indicates that neutralising the relevant variable produces a larger deviation from the baseline model within the specified mechanism.
 
