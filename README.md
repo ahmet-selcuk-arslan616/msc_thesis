@@ -1,1 +1,151 @@
-# msc_thesis
+# A Third Way in Neoclassical Realist Theory of International Politics
+
+The project develops a historically anchored agent-based model (ABM) to examine how three Type III Neoclassical Realist variables shape alliance-related decision-making and system-level alliance-network outcomes:
+
+Material capacity
+Strategic environment
+Systemic clarity
+
+The model covers 38 countries between 1995 and 2012. It combines cross-national historical data with a rule-based simulation of state decision-making under external pressure.
+
+## Core Argument
+
+The model represents a Type III Neoclassical Realist mechanism in which systemic pressures are filtered through domestic and perceptual conditions before shaping state behaviour.
+
+The three focal systemic variables operate through distinct channels:
+
+Variable	Role in the model
+Strategic environment	Captures the intensity of external pressure facing a state.
+Systemic clarity	Determines how clearly a state can interpret external pressure and whether pressure translates into action.
+Material capacity	Shapes whether a state can resist its primary threat independently or with support from allies.
+
+Domestic and unit-level variables modify the systemic inputs before they enter the ABM. These filters include:
+
+leader images and beliefs;
+strategic culture;
+state-society relations;
+domestic institutional constraints.
+
+## Model Overview
+
+Each annual simulation round follows a historically anchored sequence:
+
+The model begins from the observed Correlates of War alliance network in year t.
+Country agents receive country-year inputs for strategic environment, systemic clarity, and material capacity.
+Each country identifies its primary threat from directed dyadic pressure.
+Agents calculate action pressure, relative resistance, vulnerability, and policy utilities.
+Agents select one of three policy orientations:
+Status Quo
+Balance
+Bandwagon
+Eligible agents stage potential alliance additions or removals.
+The model applies formalisation rules, receiver acceptance, and an empirical annual alliance-change budget.
+The resulting simulated network is compared with the observed alliance network in year t + 1.
+The next annual round begins again from the observed historical network for that year.
+
+The model therefore performs a sequence of historically anchored annual transition experiments rather than an unrestricted recursive simulation.
+
+## Decision Mechanism
+
+For country i in year t, directed dyadic pressure from country j is calculated as:
+
+P_{ij,t} = w_{ij,t} \times CINC_{j,t}
+
+where:
+
+w_ij,t is the directed dyadic influence weight;
+CINC_j,t is the material capacity of country j.
+
+The primary threat is the country producing the highest directed pressure:
+
+j^*_{i,t} = \arg\max_{j \neq i}(P_{ij,t})
+
+Action pressure is calculated as:
+
+A_{i,t} = S_{i,t}\left[(1-\alpha)+\alpha C_{i,t}\right]
+
+where:
+
+S_i,t is the normalized strategic-environment score;
+C_i,t is the normalized systemic-clarity score;
+α = 0.50.
+
+A country remains in the status quo when action pressure is below the activation threshold.
+
+Relative resistance compares the country’s own and allied capacity with the capacity of its primary threat:
+
+R_{i,t} =
+\frac{K_{i,t}}
+{K_{i,t}+CINC_{j^*_{i,t},t}}
+
+where K_i,t is the combined capacity of the country and its current allies, excluding the primary threat.
+
+Vulnerability is defined as:
+
+V_{i,t} = 1 - R_{i,t}
+
+The model then calculates balancing and bandwagoning utilities:
+
+U^{Balance}_{i,t} = A_{i,t}R_{i,t}
+U^{Bandwagon}_{i,t} = A_{i,t}V_{i,t}
+
+A state balances when relative resistance is sufficiently high, bandwagons when vulnerability is sufficiently high, and retains the status quo when the difference between the two options remains too small.
+
+## Historical Anchoring
+
+A central design feature of the model is its historical anchor.
+
+At the beginning of each year, the alliance graph is reset to the observed Correlates of War alliance network for that year. The model then simulates a limited set of theoretically motivated alliance changes.
+
+This means that:
+
+the simulated network from year t is not carried forward as the starting network for year t + 1;
+every annual round begins from historically observed alliance relations;
+the model evaluates one-year-ahead structural plausibility rather than unrestricted long-run prediction;
+the number of committed changes is constrained by an empirical historical formalisation budget.
+
+This design allows the model to isolate the effect of the focal variables while avoiding the accumulation of unrealistic errors across many years.
+
+## Ablation Design
+
+The model evaluates the relative importance of the three focal variables using mean-neutralised ablations.
+
+Four conditions are estimated:
+
+Condition	Description
+baseline	Retains observed variation in all focal variables.
+neutralized_clarity	Replaces systemic clarity with its global sample mean.
+neutralized_strategic_env	Replaces strategic environment with its global sample mean.
+neutralized_capacity	Replaces the relevant capacity input with its global sample mean in the resistance-vulnerability mechanism.
+
+For each ablation, the model compares deviations from the baseline across three dimensions:
+
+Policy deviation
+Changes in the distribution of Status Quo, Balance, and Bandwagon orientations.
+Mechanism deviation
+Changes in action pressure, resistance, vulnerability, utilities, and formalisation eligibility.
+System deviation
+Changes in alliance-network structure, including edge count, density, modularity, and community structure.
+
+The overall determinacy score is:
+
+Determinacy_x =
+\frac{
+PolicyDeviation_x +
+MechanismDeviation_x +
+SystemDeviation_x
+}{3}
+
+A larger score indicates that neutralising the relevant variable produces a larger deviation from the baseline model within the specified mechanism.
+
+## Interpretation of Results
+
+The ablation analysis should be interpreted as evidence of relative importance within the specified model mechanism.
+
+The model does not claim that a single variable universally determines real-world alliance politics. Instead, it evaluates how strongly each focal input affects:
+
+policy orientations;
+internal decision mechanisms;
+constrained local deviations from the historically observed alliance network.
+
+The historical anchor is an intentional design choice. Strong similarity between baseline and observed alliance networks should therefore be interpreted as structural plausibility within a historically constrained simulation, not as evidence that the model reconstructs alliance history from first principles.
